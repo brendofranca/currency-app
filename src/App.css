@@ -1,10 +1,13 @@
 .App {
   text-align: center;
+  padding: 20px;
+  font-family: 'Poppins', 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  transition: transform 0.2s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,19 +16,21 @@
   }
 }
 
+.App-logo:hover {
+  transform: scale(1.1);
+}
+
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /* Removed custom styles for header as Material-UI handles layout */
 }
 
 .App-link {
   color: #61dafb;
+  text-decoration: none;
+}
+
+.App-link:hover {
+  text-decoration: underline;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +40,45 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  margin: 0;
+  /* font-family: Arial, sans-serif; */
+  background-color: #f0f2f5;
+}
+
+.container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+button {
+  /* Removed button styles as Material-UI overrides are used */
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.header, .footer {
+  width: 100%;
+  padding: 10px;
+  background-color: #f8f9fa;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
