@@ -68,8 +68,9 @@ function App() {
   }, [fetchRates]);
 
   const convertedAmounts = useMemo(() => {
+    const numericAmount = parseFloat(amount.replace(/\./g, '').replace(',', '.')) || 0;
     return (rates || []).reduce((acc, { currency, rate }) => {
-      acc[currency] = amount * rate;
+      acc[currency] = numericAmount * rate;
       return acc;
     }, {});
   }, [rates, amount]);
