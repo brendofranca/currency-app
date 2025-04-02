@@ -17,7 +17,7 @@ function App() {
     const baseUrl =
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:8080/currency'
-        : 'https://currency-api-production-9e99.up.railway.app/currency';
+        : 'https://currency-api-production-01.up.railway.app/currency';
 
     try {
       setError(null);
