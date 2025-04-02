@@ -15,7 +15,7 @@ const baseUrl =
 function App() {
   const [base, setBase] = useState('BRL');
   const [target, setTarget] = useState('EUR');
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState('0,00');
   const [, setRate] = useState(null);
   const [error, setError] = useState(null);
   const [rates, setRates] = useState([]);
@@ -49,7 +49,7 @@ function App() {
       const response = await fetch(`${baseUrl}/${initialBase}/${initialTarget}`);
       const data = await response.json();
 
-      setRates([{ currency: initialTarget, rate: data.rate }]); // Ensure rates include the target currency
+      setRates([{ currency: initialTarget, rate: data.rate }]);
       setLastUpdated(moment(data.lastUpdated).format('DD/MM/YYYY HH:mm:ss'));
       setApiStatus(true);
 
@@ -73,6 +73,18 @@ function App() {
       return acc;
     }, {});
   }, [rates, amount]);
+
+  const handleAmountChange = (e) => {
+    const formattedValue = formatCurrencyValue(e.target.value);
+    setAmount(formattedValue);
+  };
+
+  const formatCurrencyValue = (value) => {
+    let numericValue = value.replace(/\D/g, '');
+    if (numericValue === '') numericValue = '0';
+    const parsedValue = parseFloat(numericValue) / 100;
+    return parsedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  };
 
   return (
     <Container maxWidth="sm" sx={{ padding: 4 }}>
@@ -101,11 +113,11 @@ function App() {
           </Grid>
           <TextField
             label="Amount"
-            type="number"
+            type="text"
             variant="outlined"
             fullWidth
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={handleAmountChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -136,7 +148,7 @@ function App() {
                   <Paper variant="outlined" sx={{ p: 1, display: 'flex', alignItems: 'center' }}>
                     <Box sx={{ ml: 1 }}>
                       <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{option.label}</Typography>
-                      <Typography variant="body2">{CurrencyFormatter(rate, option.value)}</Typography>
+                      <Typography variant="body2">{CurrencyFormatter(1, base)} = {CurrencyFormatter(rate, option.value)}</Typography>
                       <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
                         {CurrencyFormatter(amount, base)} = {CurrencyFormatter(convertedAmounts[option.value] || 0, option.value)}
                       </Typography>
