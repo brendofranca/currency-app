@@ -77,8 +77,7 @@ function App() {
   }, [rates, amount]);
 
   const handleAmountChange = (e) => {
-    const formattedValue = formatCurrencyValue(e.target.value);
-    setAmount(formattedValue);
+    setAmount(formatCurrencyValue(e.target.value));
   };
 
   const formatCurrencyValue = (value) => {
@@ -88,6 +87,67 @@ function App() {
     return parsedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   };
 
+  const renderCurrencyOptions = () => (
+    <Grid>
+      <Grid item xs={12}>
+        <CurrencyOptions
+          value={base}
+          onChange={(e) => setBase(e.target.value)}
+          label="Base Currency"
+          fullWidth
+        />
+      </Grid>
+      <Grid>
+        <CurrencyOptions
+          value={target}
+          onChange={(e) => setTarget(e.target.value)}
+          label="Target Currency"
+          fullWidth
+        />
+      </Grid>
+    </Grid>
+  );
+
+  const renderConvertedRates = () => (
+    <Grid sx={{ marginTop: 2 }}>
+      {CURRENCY_OPTIONS.filter(option => (rates || []).some(rate => rate.currency === option.value)).map(option => {
+        const rate = (rates || []).find(rate => rate.currency === option.value)?.rate || 0;
+        return (
+          <Grid item xs={12} sm={6} md={4} key={option.value}>
+            <Paper variant="outlined" sx={{ p: 1, display: 'flex', alignItems: 'center' }}>
+              <Box sx={{ ml: 1 }}>
+                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{option.label}</Typography>
+                <Typography variant="body2">{CurrencyFormatter(1, base)} = {CurrencyFormatter(rate, option.value)}</Typography>
+                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                  {CurrencyFormatter(amount.replace(/\./g, '').replace(',', '.'), base)} = {CurrencyFormatter(convertedAmounts[option.value] || 0, option.value)}
+                </Typography>
+              </Box>
+            </Paper>
+          </Grid>
+        );
+      })}
+    </Grid>
+  );
+
+  const renderFooter = () => (
+    <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ opacity: 0.8, mt: 2, p: 1, border: '1px solid #ddd', borderRadius: 1 }}>
+      <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <strong>Last updated:</strong> {lastUpdated}
+      </Typography>
+      <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <strong>Source:</strong> 
+        <a href="https://www.exchangerate-api.com/" target="_blank" rel="noopener noreferrer">
+          Exchange Rate API
+        </a>
+        {apiStatus ? (
+          <CheckCircleIcon color="success" />
+        ) : (
+          <ErrorIcon color="error" />
+        )}
+      </Typography>
+    </Box>
+  );
+
   return (
     <Container maxWidth="sm" sx={{ padding: 4 }}>
       <Paper elevation={1} variant="elevation" sx={{ p: 2, mt: 1 }}>
@@ -95,24 +155,7 @@ function App() {
           <Typography variant="h4" gutterBottom>
             Currency Converter
           </Typography>
-          <Grid>
-            <Grid item xs={12}>
-              <CurrencyOptions
-                value={base}
-                onChange={(e) => setBase(e.target.value)}
-                label="Base Currency"
-                fullWidth
-              />
-            </Grid>
-            <Grid>
-              <CurrencyOptions
-                value={target}
-                onChange={(e) => setTarget(e.target.value)}
-                label="Target Currency"
-                fullWidth
-              />
-            </Grid>
-          </Grid>
+          {renderCurrencyOptions()}
           <TextField
             label="Amount"
             type="text"
@@ -142,40 +185,8 @@ function App() {
               {error}
             </Alert>
           )}
-          <Grid sx={{ marginTop: 2 }}>
-            {CURRENCY_OPTIONS.filter(option => (rates || []).some(rate => rate.currency === option.value)).map(option => {
-              const rate = (rates || []).find(rate => rate.currency === option.value)?.rate || 0;
-              return (
-                <Grid item xs={12} sm={6} md={4} key={option.value}>
-                  <Paper variant="outlined" sx={{ p: 1, display: 'flex', alignItems: 'center' }}>
-                    <Box sx={{ ml: 1 }}>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{option.label}</Typography>
-                      <Typography variant="body2">{CurrencyFormatter(1, base)} = {CurrencyFormatter(rate, option.value)}</Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                        {CurrencyFormatter(amount.replace(/\./g, '').replace(',', '.'), base)} = {CurrencyFormatter(convertedAmounts[option.value] || 0, option.value)}
-                      </Typography>
-                    </Box>
-                  </Paper>
-                </Grid>
-              );
-            })}
-          </Grid>
-          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ opacity: 0.8, mt: 2, p: 1, border: '1px solid #ddd', borderRadius: 1 }}>
-            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <strong>Last updated:</strong> {lastUpdated}
-            </Typography>
-            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <strong>Source:</strong> 
-              <a href="https://www.exchangerate-api.com/" target="_blank" rel="noopener noreferrer">
-                Exchange Rate API
-              </a>
-              {apiStatus ? (
-                <CheckCircleIcon color="success" />
-              ) : (
-                <ErrorIcon color="error" />
-              )}
-            </Typography>
-          </Box>
+          {renderConvertedRates()}
+          {renderFooter()}
         </Box>
       </Paper>
     </Container>
