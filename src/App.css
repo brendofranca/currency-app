@@ -20,10 +20,6 @@
   transform: scale(1.1);
 }
 
-.App-header {
-  /* Removed custom styles for header as Material-UI handles layout */
-}
-
 .App-link {
   color: #61dafb;
   text-decoration: none;
@@ -52,10 +48,6 @@ body {
   padding: 20px;
   margin: 0 auto;
   max-width: 1200px;
-}
-
-button {
-  /* Removed button styles as Material-UI overrides are used */
 }
 
 .layout {
