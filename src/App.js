@@ -50,7 +50,7 @@ function App() {
       const data = await response.json();
 
       setRates([{ currency: initialTarget, rate: data.rate }]);
-      setLastUpdated(moment(data.lastUpdated).format('DD/MM/YYYY HH:mm:ss'));
+      setLastUpdated(moment(data.last_update_utc).format('DD/MM/YYYY HH:mm:ss'));
       setApiStatus(true);
 
       if (!base && !target) {
@@ -165,7 +165,10 @@ function App() {
               <strong>Last updated:</strong> {lastUpdated}
             </Typography>
             <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <strong>Source:</strong> Exchange Rate API
+              <strong>Source:</strong> 
+              <a href="https://www.exchangerate-api.com/" target="_blank" rel="noopener noreferrer">
+                Exchange Rate API
+              </a>
               {apiStatus ? (
                 <CheckCircleIcon color="success" />
               ) : (
