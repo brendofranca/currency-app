@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { AnimatePresence } from 'framer-motion';
 import App from './App';
-import ScrollToTop from './ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 import reportWebVitals from './reportWebVitals';
 import theme from './theme';
 import '@fontsource/roboto/300.css';
@@ -13,7 +13,6 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@fontsource/poppins';
 import './index.css';
-import { AuthProvider } from './hooks/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -23,9 +22,7 @@ root.render(
       <Router>
         <ScrollToTop />
         <AnimatePresence mode="wait">
-          <AuthProvider>
             <App />
-          </AuthProvider>
         </AnimatePresence>
       </Router>
     </ThemeProvider>
