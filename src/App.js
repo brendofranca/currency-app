@@ -3,7 +3,7 @@ import { TextField, Button, Typography, Container, Box, Alert, Paper, InputAdorn
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import moment from './utils/Moment';
-import { CurrencyFormatter } from './utils/CurrencyFormatter';
+import { CurrencyFormatter, formatCurrencyValue } from './utils/Currency';
 import CurrencyOptions, { CURRENCY_OPTIONS } from './components/common/CurrencyOptions';
 import './App.css';
 
@@ -78,13 +78,6 @@ function App() {
 
   const handleAmountChange = (e) => {
     setAmount(formatCurrencyValue(e.target.value));
-  };
-
-  const formatCurrencyValue = (value) => {
-    let numericValue = value.replace(/\D/g, ''); 
-    if (numericValue === '') numericValue = '0';
-    const parsedValue = parseFloat(numericValue) / 100; 
-    return parsedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   };
 
   const renderCurrencyOptions = () => (
