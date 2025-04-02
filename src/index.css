@@ -3,7 +3,6 @@ body {
   font-family: 'Poppins', 'Roboto', 'Helvetica', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f4f6f8; /* Matches theme.palette.background.default */
 }
 
 code {

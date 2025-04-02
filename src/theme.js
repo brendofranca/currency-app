@@ -5,15 +5,34 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 700,
     },
     h2: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: 600,
     },
     body1: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
       fontSize: 16,
     },
+    body2: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    },
+    subtitle1: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    },
+    subtitle2: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    },
+    caption: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    },
+    overline: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    },
     button: {
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
       textTransform: 'none',
       fontWeight: 500,
     },

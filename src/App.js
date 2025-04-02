@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   const [base, setBase] = useState('');
   const [target, setTarget] = useState('');
+  const [amount, setAmount] = useState(1); // New state for amount
   const [rate, setRate] = useState(null);
   const [error, setError] = useState(null);
 
@@ -35,15 +36,8 @@ function App() {
 
   return (
     <Container maxWidth="sm" sx={{ padding: 4 }}>
-      <Paper elevation={3} sx={{ padding: 4, borderRadius: 2 }}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+      <Paper elevation={1} variant="elevation" sx={{ p: 2, mt: 1 }}>
+        <Box>
           <Typography variant="h4" gutterBottom>
             Currency Converter
           </Typography>
@@ -65,6 +59,15 @@ function App() {
             error={!target && error}
             helperText={!target && error ? 'This field is required' : ''}
           />
+          <TextField
+            label="Amount"
+            type="number"
+            variant="outlined"
+            fullWidth
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            sx={{ marginTop: 2 }}
+          />
           <Button
             variant="contained"
             color="primary"
@@ -81,6 +84,11 @@ function App() {
           {rate !== null && !error && (
             <Typography variant="h6" sx={{ marginTop: 2 }}>
               Conversion Rate: 1 {base} = {rate} {target}
+            </Typography>
+          )}
+          {rate !== null && !error && (
+            <Typography variant="h6" sx={{ marginTop: 2 }}>
+              Converted Amount: {amount} {base} = {(amount * rate).toFixed(2)} {target}
             </Typography>
           )}
         </Box>
