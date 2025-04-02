@@ -3,8 +3,16 @@ import { MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 
 const CURRENCY_OPTIONS = [
   { value: 'BRL', label: 'Brazilian Real', symbol: 'R$', flag: 'https://flagcdn.com/w320/br.png' },
+  { value: 'USD', label: 'United States Dollar', symbol: '$', flag: 'https://flagcdn.com/w320/us.png' },
   { value: 'EUR', label: 'Euro', symbol: '€', flag: 'https://flagcdn.com/w320/eu.png' },
-  { value: 'USD', label: 'United States Dollar', symbol: '$', flag: 'https://flagcdn.com/w320/us.png' }
+  { value: 'JPY', label: 'Japanese Yen', symbol: '¥', flag: 'https://flagcdn.com/w320/jp.png' },
+  { value: 'GBP', label: 'British Pound', symbol: '£', flag: 'https://flagcdn.com/w320/gb.png' },
+  { value: 'AUD', label: 'Australian Dollar', symbol: 'A$', flag: 'https://flagcdn.com/w320/au.png' },
+  { value: 'CAD', label: 'Canadian Dollar', symbol: 'C$', flag: 'https://flagcdn.com/w320/ca.png' },
+  { value: 'CHF', label: 'Swiss Franc', symbol: 'CHF', flag: 'https://flagcdn.com/w320/ch.png' },
+  { value: 'CNY', label: 'Chinese Yuan', symbol: '¥', flag: 'https://flagcdn.com/w320/cn.png' },
+  { value: 'HKD', label: 'Hong Kong Dollar', symbol: 'HK$', flag: 'https://flagcdn.com/w320/hk.png' },
+  { value: 'NZD', label: 'New Zealand Dollar', symbol: 'NZ$', flag: 'https://flagcdn.com/w320/nz.png' }
 ];
 
 const CurrencyOptions = ({ value, onChange, label }) => (

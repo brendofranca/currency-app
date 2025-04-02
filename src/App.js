@@ -16,7 +16,7 @@ function App() {
   const [base, setBase] = useState('BRL');
   const [target, setTarget] = useState('EUR');
   const [amount, setAmount] = useState(1);
-  const [rate, setRate] = useState(null);
+  const [, setRate] = useState(null);
   const [error, setError] = useState(null);
   const [rates, setRates] = useState([]);
   const [lastUpdated, setLastUpdated] = useState('');
