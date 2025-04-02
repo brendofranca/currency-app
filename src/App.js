@@ -68,7 +68,8 @@ function App() {
   }, [fetchRates]);
 
   const convertedAmounts = useMemo(() => {
-    const numericAmount = parseFloat(amount.replace(/\./g, '').replace(',', '.')) || 0;
+    const numericAmount = parseFloat(amount.replace(/\./g, '').replace(',', '.'));
+    if (isNaN(numericAmount)) return {}; 
     return (rates || []).reduce((acc, { currency, rate }) => {
       acc[currency] = numericAmount * rate;
       return acc;
@@ -81,9 +82,9 @@ function App() {
   };
 
   const formatCurrencyValue = (value) => {
-    let numericValue = value.replace(/\D/g, '');
+    let numericValue = value.replace(/\D/g, ''); 
     if (numericValue === '') numericValue = '0';
-    const parsedValue = parseFloat(numericValue) / 100;
+    const parsedValue = parseFloat(numericValue) / 100; 
     return parsedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   };
 
@@ -151,7 +152,7 @@ function App() {
                       <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{option.label}</Typography>
                       <Typography variant="body2">{CurrencyFormatter(1, base)} = {CurrencyFormatter(rate, option.value)}</Typography>
                       <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-                        {CurrencyFormatter(amount, base)} = {CurrencyFormatter(convertedAmounts[option.value] || 0, option.value)}
+                        {CurrencyFormatter(amount.replace(/\./g, '').replace(',', '.'), base)} = {CurrencyFormatter(convertedAmounts[option.value] || 0, option.value)}
                       </Typography>
                     </Box>
                   </Paper>
@@ -159,7 +160,7 @@ function App() {
               );
             })}
           </Grid>
-          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ opacity: 0.8, mt: 3, p: 1, border: '1px solid #ddd', borderRadius: 1 }}>
+          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ opacity: 0.8, mt: 2, p: 1, border: '1px solid #ddd', borderRadius: 1 }}>
             <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <strong>Last updated:</strong> {lastUpdated}
             </Typography>
