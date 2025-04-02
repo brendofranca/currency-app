@@ -159,13 +159,16 @@ function App() {
               );
             })}
           </Grid>
-          <Box display="flex" alignItems="center" sx={{ opacity: 0.6, mt: 2 }}>
-            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
-              <strong>Last updated:</strong> {lastUpdated} <strong>Source:</strong> Exchange Rate API
+          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ opacity: 0.8, mt: 3, p: 1, border: '1px solid #ddd', borderRadius: 1 }}>
+            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <strong>Last updated:</strong> {lastUpdated}
+            </Typography>
+            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <strong>Source:</strong> Exchange Rate API
               {apiStatus ? (
-                <CheckCircleIcon color="success" sx={{ ml: 1 }} />
+                <CheckCircleIcon color="success" />
               ) : (
-                <ErrorIcon color="error" sx={{ ml: 1 }} />
+                <ErrorIcon color="error" />
               )}
             </Typography>
           </Box>
